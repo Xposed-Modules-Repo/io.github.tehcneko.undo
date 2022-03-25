@@ -32,14 +32,24 @@ public class UndoHook implements IXposedHookLoadPackage {
                             var editor = editorField.get(param.thisObject);
                             var textView = textViewField.get(editor);
                             var menu = (Menu) param.args[0];
-                            if ((boolean) XposedHelpers.callMethod(textView, "canUndo")) {
-                                menu.add(Menu.NONE, android.R.id.undo, 2, undoId)
-                                        .setAlphabeticShortcut('z')
-                                        .setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+                            var undoItem = menu.findItem(undoId);
+                            if (undoItem == null) {
+                                if ((boolean) XposedHelpers.callMethod(textView, "canUndo")) {
+                                    menu.add(Menu.NONE, android.R.id.undo, 2, undoId)
+                                            .setAlphabeticShortcut('z')
+                                            .setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+                                }
+                            } else {
+                                undoItem.setVisible((boolean) XposedHelpers.callMethod(textView, "canUndo"));
                             }
-                            if ((boolean) XposedHelpers.callMethod(textView, "canRedo")) {
-                                menu.add(Menu.NONE, android.R.id.redo, 3, redoId)
-                                        .setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+                            var redoItem = menu.findItem(redoId);
+                            if (redoItem == null) {
+                                if ((boolean) XposedHelpers.callMethod(textView, "canRedo")) {
+                                    menu.add(Menu.NONE, android.R.id.redo, 3, redoId)
+                                            .setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+                                }
+                            } else {
+                                redoItem.setVisible((boolean) XposedHelpers.callMethod(textView, "canRedo"));
                             }
                         }
                     });
