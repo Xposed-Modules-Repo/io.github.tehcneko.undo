@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="xposed_description">将撤消和重做添加到所有 EditText 上下文菜单。</string>
+</resources>

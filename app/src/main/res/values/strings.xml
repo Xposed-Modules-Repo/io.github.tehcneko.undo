@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Undo</string>
+    <string name="xposed_description">Add undo and redo to all EditText context menus.</string>
+</resources>
