@@ -1,0 +1,3 @@
+<resources>
+    <string name="xposed_description">Добавляет «Отменить» и «Повторить» во все контекстные меню EditText.</string>
+</resources>
